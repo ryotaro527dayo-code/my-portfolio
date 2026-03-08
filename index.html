@@ -15,7 +15,7 @@
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -55,19 +55,43 @@
       transform: translateY(-5px);
     }
 
-    /* Works プレースホルダー */
+    /* Works プレースホルダー（ブラウザ風クロム） */
     .work-thumb {
       width: 100%;
       height: 11rem;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.08em;
+      flex-direction: column;
+      overflow: hidden;
       transition: transform 0.5s ease;
     }
     .group:hover .work-thumb { transform: scale(1.05); }
+    .work-thumb-bar {
+      height: 26px;
+      background: rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .work-thumb-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .work-thumb-url {
+      flex: 1;
+      height: 13px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 2px;
+      margin-left: 6px;
+    }
+    .work-thumb-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
     .thumb-salon   { background: linear-gradient(135deg,#1a1a2e 0%,#2d2b55 100%); }
     .thumb-clinic  { background: linear-gradient(135deg,#0d1f17 0%,#1a3d2b 100%); }
     .thumb-wagyu   { background: linear-gradient(135deg,#1f0d0d 0%,#3d1a1a 100%); }
@@ -115,11 +139,11 @@
 
       <!-- デスクトップナビ -->
       <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
-        <a href="#about"    class="hover:text-white transition-colors">について</a>
-        <a href="#services" class="hover:text-white transition-colors">できること</a>
-        <a href="#works"    class="hover:text-white transition-colors">実績</a>
-        <a href="#pricing"  class="hover:text-white transition-colors">料金</a>
-        <a href="#process"  class="hover:text-white transition-colors">制作の流れ</a>
+        <a href="#about"    class="hover:text-white transition-colors">About</a>
+        <a href="#services" class="hover:text-white transition-colors">Services</a>
+        <a href="#works"    class="hover:text-white transition-colors">Works</a>
+        <a href="#pricing"  class="hover:text-white transition-colors">Pricing</a>
+        <a href="#process"  class="hover:text-white transition-colors">Process</a>
       </div>
 
       <div class="flex items-center gap-3">
@@ -140,11 +164,11 @@
     <!-- モバイルメニュー -->
     <div id="mobile-menu"
          class="md:hidden flex-col bg-zinc-900 border-t border-zinc-800 px-4 py-4 gap-1">
-      <a href="#about"    onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">について</a>
-      <a href="#services" onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">できること</a>
-      <a href="#works"    onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">実績</a>
-      <a href="#pricing"  onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">料金</a>
-      <a href="#process"  onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">制作の流れ</a>
+      <a href="#about"    onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">About</a>
+      <a href="#services" onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">Services</a>
+      <a href="#works"    onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">Works</a>
+      <a href="#pricing"  onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">Pricing</a>
+      <a href="#process"  onclick="closeMobileMenu()" class="block py-3 text-sm text-zinc-300 border-b border-zinc-800 hover:text-white">Process</a>
       <a href="#contact"  onclick="closeMobileMenu()" class="block mt-3 text-center bg-accent text-white py-3 text-sm font-bold">無料相談する</a>
     </div>
   </nav>
@@ -158,40 +182,36 @@
       <!-- ステータスバッジ -->
       <div class="inline-flex items-center gap-2 border border-accent/30 bg-accent/10 text-accent-light text-xs px-4 py-2 mb-10 tracking-wide">
         <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block"></span>
-        フリーランス Web エンジニア ／ 現在受注中
+        Webサイト制作 ／ 現在受注中
       </div>
 
       <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[70px] font-black leading-[1.1] mb-8">
-        集客できる<span class="gradient-text">LP</span>＋<br>
-        業務を効率化する<span class="gradient-text">システム</span>、<br>
+        <span class="gradient-text">集客ページ</span>＋<br>
+        <span class="gradient-text">予約の自動化</span>を、<br>
         まとめて作ります。
       </h1>
 
       <p class="text-zinc-400 text-base md:text-lg leading-relaxed mb-12 max-w-2xl mx-auto">
-        静的なLPだけでなく、予約システム・料金シミュレーター・<br class="hidden sm:block">
-        自動メールフォームまで。集客から業務効率化まで、ワンストップ対応。
+        「もっとお客さんに来てほしい」「予約の電話対応をなくしたい」<br class="hidden sm:block">
+        飲食・美容・医療・不動産など、地域ビジネスのお悩みをWebで解決します。
       </p>
 
-      <!-- 技術スタックバッジ -->
+      <!-- 解決できること（ベネフィットバッジ） -->
       <div class="flex flex-wrap justify-center gap-2 mb-14">
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">HTML / CSS</span>
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">JavaScript</span>
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">PHP / WordPress</span>
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">Tailwind CSS</span>
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">MySQL / MariaDB</span>
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">Formspree</span>
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">Calendly</span>
-        <span class="bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs px-3 py-1.5 rounded-sm">Vercel</span>
+        <span class="bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs px-3 py-1.5 rounded-sm">✓ 24時間 自動で予約受付</span>
+        <span class="bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs px-3 py-1.5 rounded-sm">✓ 新規客を呼び込む集客ページ</span>
+        <span class="bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs px-3 py-1.5 rounded-sm">✓ 問い合わせ対応の自動化</span>
+        <span class="bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs px-3 py-1.5 rounded-sm">✓ スマホでも崩れないデザイン</span>
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#works"
-           class="bg-accent hover:bg-accent-dark text-white px-8 py-4 font-bold text-base transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/25">
-          制作実績を見る
-        </a>
         <a href="#contact"
-           class="border border-zinc-700 hover:border-accent/50 text-zinc-300 hover:text-white px-8 py-4 font-medium text-base transition-all hover:-translate-y-0.5">
+           class="bg-accent hover:bg-accent-dark text-white px-8 py-4 font-bold text-base transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/25">
           無料相談はこちら
+        </a>
+        <a href="#works"
+           class="border border-zinc-700 hover:border-accent/50 text-zinc-300 hover:text-white px-8 py-4 font-medium text-base transition-all hover:-translate-y-0.5">
+          制作実績を見る
         </a>
       </div>
 
@@ -201,43 +221,53 @@
   <!-- ========== 2. 自己紹介 ========== -->
   <section id="about" class="py-24 bg-zinc-900 border-t border-zinc-800" aria-labelledby="about-heading">
     <div class="max-w-5xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
+      <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
 
         <!-- アバター -->
         <div class="shrink-0 text-center">
-          <div class="w-32 h-32 rounded-full bg-gradient-to-br from-accent/40 to-violet-600/40 border-2 border-accent/30 flex items-center justify-center mx-auto mb-4">
-            <span class="text-4xl font-black text-accent-light">J</span>
-          </div><!-- TODO: 顔写真に差し替え（<img src="photo.jpg" alt="jelis" class="w-32 h-32 rounded-full object-cover">） -->
+          <img src="paw.png" alt="jelis" class="w-20 h-20 lg:w-32 lg:h-32 rounded-full object-cover mx-auto mb-4 border-2 border-accent/30" style="background:#18181b;">
+          <p class="font-bold text-base mb-1">jelis</p>
           <p class="text-xs text-zinc-500">Webエンジニア</p>
-          <p class="font-bold text-base mt-1">jelis</p>
         </div>
 
         <!-- テキスト -->
         <div>
           <p class="text-accent text-xs tracking-[0.4em] uppercase font-medium mb-3">About</p>
-          <h2 id="about-heading" class="text-2xl md:text-3xl font-black mb-6">
-            フロントからバックエンドまで<br>
-            一気通貫で対応します
+          <h2 id="about-heading" class="text-2xl md:text-3xl font-bold mb-6">
+            打ち合わせから公開まで、<br>
+            すべてお任せできます
           </h2>
-          <p class="text-zinc-400 text-sm leading-loose mb-6">
-            フリーランスWebエンジニアとして、飲食・美容・医療・不動産など幅広い業種のLP制作・Webシステム構築を手がけています。
-            HTML/CSS/JavaScriptによるフロントエンドからPHP・WordPressを使ったバックエンドまで一人で完結。
-            デザイン・実装・公開まで一貫して担当するため、複数の業者をまたぐ手間もコストも不要です。
-            「何から相談すればいいかわからない」という段階からでもお気軽にどうぞ。
+          <p class="text-zinc-400 text-sm leading-relaxed mb-3">
+            飲食・美容・医療・不動産など、地域ビジネスのWebサイト制作を専門に手がけています。
+          </p>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-3">
+            デザインの打ち合わせから制作・公開まで、全部ひとりで担当。<br>
+            複数の業者をまたぐ手間もコストも、一切不要です。
+          </p>
+          <p class="text-white text-sm font-medium leading-relaxed mb-6">
+            ご相談は無料。まず一度、話してみてください。
           </p>
 
+          <!-- ベネフィットバッジ -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="bg-accent/10 border border-accent/25 text-accent-light text-xs px-3 py-1.5">✓ WordPress・HTML どちらも対応</span>
+            <span class="bg-accent/10 border border-accent/25 text-accent-light text-xs px-3 py-1.5">✓ スマホ・PC 両対応</span>
+            <span class="bg-accent/10 border border-accent/25 text-accent-light text-xs px-3 py-1.5">✓ 予約・問い合わせの自動化</span>
+            <span class="bg-accent/10 border border-accent/25 text-accent-light text-xs px-3 py-1.5">✓ 公開後のサポートあり</span>
+          </div>
+
           <!-- 数値実績 -->
-          <div class="grid grid-cols-3 gap-6 mt-8">
-            <div class="text-center border border-zinc-800 py-5">
-              <p class="text-3xl font-black text-accent-light mb-1">10<span class="text-lg">+</span></p>
+          <div class="grid grid-cols-3 gap-2 sm:gap-4 mt-8">
+            <div class="text-center border border-zinc-700 bg-zinc-800/50 py-3 sm:py-5 px-1">
+              <p class="text-2xl sm:text-3xl font-black text-accent-light mb-1">10<span class="text-base sm:text-lg">+</span></p>
               <p class="text-zinc-500 text-xs">制作実績</p>
             </div>
-            <div class="text-center border border-zinc-800 py-5">
-              <p class="text-3xl font-black text-accent-light mb-1">2<span class="text-lg">年</span></p>
+            <div class="text-center border border-zinc-700 bg-zinc-800/50 py-3 sm:py-5 px-1">
+              <p class="text-2xl sm:text-3xl font-black text-accent-light mb-1">2<span class="text-base sm:text-lg">年</span></p>
               <p class="text-zinc-500 text-xs">エンジニア歴</p>
             </div>
-            <div class="text-center border border-zinc-800 py-5">
-              <p class="text-3xl font-black text-accent-light mb-1">24h</p>
+            <div class="text-center border border-zinc-700 bg-zinc-800/50 py-3 sm:py-5 px-1">
+              <p class="text-2xl sm:text-3xl font-black text-accent-light mb-1">24h</p>
               <p class="text-zinc-500 text-xs">返信目安</p>
             </div>
           </div>
@@ -252,8 +282,8 @@
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center mb-16">
         <p class="text-accent text-xs tracking-[0.4em] uppercase font-medium mb-3">Services</p>
-        <h2 id="services-heading" class="text-3xl md:text-4xl font-black mb-3">できること</h2>
-        <p class="text-zinc-500 text-sm">LP制作から業務システム構築まで、幅広く対応</p>
+        <h2 id="services-heading" class="text-3xl md:text-4xl font-bold mb-3">できること</h2>
+        <p class="text-zinc-500 text-sm">「困っていること」をそのままご相談ください</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -265,12 +295,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-base mb-2">LP制作</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed mb-5">集客に特化したランディングページ。モバイルでも崩れない高品質なレスポンシブデザイン。</p>
+          <h3 class="font-semibold text-base mb-2">集客ページ制作</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-5">「お店を知らなかった人」を「来店・問い合わせ」に変える広告ページ。スマホでも見やすく、Googleにも載りやすく仕上げます。</p>
           <ul class="space-y-2 text-xs text-zinc-400">
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>レスポンシブ対応</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>SEO基本設定</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>高速表示・Vercel配信</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>スマホ・PC 両対応</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>Google 検索に載りやすい設定</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>表示スピードが速い</li>
           </ul>
         </div>
 
@@ -281,12 +311,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-base mb-2">予約システム構築</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed mb-5">CalendlyをLP内にシームレス埋め込み。24時間自動で予約受付・メール通知が可能に。</p>
+          <h3 class="font-semibold text-base mb-2">予約対応の自動化</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-5">「営業中に予約電話が鳴りやまない」を解消。お客さんが自分でWeb予約でき、確認メールも自動送信されます。</p>
           <ul class="space-y-2 text-xs text-zinc-400">
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>24時間自動受付</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>自動メール通知</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>スマホ完全対応</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>24時間 電話なしで予約受付</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>確認メールを自動送信</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>スマホから簡単に予約</li>
           </ul>
         </div>
 
@@ -297,12 +327,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-base mb-2">料金シミュレーター</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed mb-5">条件を選ぶと即座に料金が計算されるインタラクティブなツールをLP内に実装。問い合わせを促進。</p>
+          <h3 class="font-semibold text-base mb-2">料金かんたん計算ツール</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-5">「料金を聞くのが面倒」で離脱するお客さんを減らします。条件を選ぶだけで目安料金がその場でわかる仕組みをページ内に設置。</p>
           <ul class="space-y-2 text-xs text-zinc-400">
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>リアルタイム計算</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>問い合わせ率アップ</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>サーバー不要</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>選ぶだけで料金がわかる</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>問い合わせ・申込が増える</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>電話での料金説明が減る</li>
           </ul>
         </div>
 
@@ -313,12 +343,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-base mb-2">フォーム構築</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed mb-5">バリデーション付きのお問い合わせフォームをFormspree連携で実装。送信後に自動メール通知。</p>
+          <h3 class="font-semibold text-base mb-2">問い合わせの自動化</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed mb-5">「メールが来たか確認する手間」をなくします。お客さんが送信した瞬間、あなたのメールに自動で届く仕組みをページに設置。</p>
           <ul class="space-y-2 text-xs text-zinc-400">
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>バリデーション実装</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>自動メール通知</li>
-            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>スパム対策</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>送信と同時にメールが届く</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>お客さんへの自動返信も可能</li>
+            <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>迷惑メール対策済み</li>
           </ul>
         </div>
 
@@ -331,7 +361,7 @@
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center mb-16">
         <p class="text-accent text-xs tracking-[0.4em] uppercase font-medium mb-3">Works</p>
-        <h2 id="works-heading" class="text-3xl md:text-4xl font-black mb-3">制作実績</h2>
+        <h2 id="works-heading" class="text-3xl md:text-4xl font-bold mb-3">制作実績</h2>
         <p class="text-zinc-500 text-sm">実際に制作・納品したプロジェクト（一部抜粋）</p>
       </div>
 
@@ -340,15 +370,18 @@
         <!-- 1. Hair Salon BLOOM -->
         <div class="card bg-zinc-950 border border-zinc-800 hover:border-accent/40 overflow-hidden group">
           <div class="overflow-hidden">
-            <div class="work-thumb thumb-salon">Salon LP</div>
+            <div class="work-thumb thumb-salon">
+              <div class="work-thumb-bar"><span class="work-thumb-dot" style="background:#ff5f57"></span><span class="work-thumb-dot" style="background:#febc2e"></span><span class="work-thumb-dot" style="background:#28c840"></span><span class="work-thumb-url"></span></div>
+              <div class="work-thumb-body">Salon LP</div>
+            </div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap items-center gap-2 mb-3">
               <span class="text-xs bg-zinc-800 text-zinc-400 px-2.5 py-1">美容室</span>
-              <span class="text-xs bg-accent/15 text-accent-light border border-accent/30 px-2.5 py-1">Calendly予約連携</span>
+              <span class="text-xs bg-accent/15 text-accent-light border border-accent/30 px-2.5 py-1">オンライン予約連携</span>
             </div>
-            <h3 class="font-bold text-base mb-2">Hair Salon BLOOM</h3>
-            <p class="text-zinc-500 text-sm mb-4 leading-relaxed">東京都渋谷区の美容室LP。24時間オンライン予約をCalendlyでシームレスに実装。</p>
+            <h3 class="font-semibold text-base mb-2">Hair Salon BLOOM</h3>
+            <p class="text-zinc-400 text-sm mb-4 leading-relaxed">東京都渋谷区の美容室LP。24時間オンライン予約をCalendlyでシームレスに実装。</p>
             <a href="https://lp-projects.vercel.app/salon.html" target="_blank" rel="noopener"
                aria-label="Hair Salon BLOOM のサイトを見る（新しいタブで開く）"
                class="inline-flex items-center gap-1.5 text-accent text-xs hover:text-accent-light transition-colors font-medium">
@@ -361,15 +394,18 @@
         <!-- 2. さくら整骨院 -->
         <div class="card bg-zinc-950 border border-zinc-800 hover:border-accent/40 overflow-hidden group">
           <div class="overflow-hidden">
-            <div class="work-thumb thumb-clinic">Clinic LP</div>
+            <div class="work-thumb thumb-clinic">
+              <div class="work-thumb-bar"><span class="work-thumb-dot" style="background:#ff5f57"></span><span class="work-thumb-dot" style="background:#febc2e"></span><span class="work-thumb-dot" style="background:#28c840"></span><span class="work-thumb-url"></span></div>
+              <div class="work-thumb-body">Clinic LP</div>
+            </div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap items-center gap-2 mb-3">
               <span class="text-xs bg-zinc-800 text-zinc-400 px-2.5 py-1">整骨院</span>
               <span class="text-xs bg-accent/15 text-accent-light border border-accent/30 px-2.5 py-1">料金シミュレーター</span>
             </div>
-            <h3 class="font-bold text-base mb-2">さくら整骨院</h3>
-            <p class="text-zinc-500 text-sm mb-4 leading-relaxed">大阪市北区の整骨院LP。保険種別・通院頻度に応じたリアルタイム料金計算機能付き。</p>
+            <h3 class="font-semibold text-base mb-2">さくら整骨院</h3>
+            <p class="text-zinc-400 text-sm mb-4 leading-relaxed">大阪市北区の整骨院LP。保険種別・通院頻度に応じたリアルタイム料金計算機能付き。</p>
             <a href="https://lp-projects.vercel.app/sakura-seikotsu.html" target="_blank" rel="noopener"
                aria-label="さくら整骨院 のサイトを見る（新しいタブで開く）"
                class="inline-flex items-center gap-1.5 text-accent text-xs hover:text-accent-light transition-colors font-medium">
@@ -382,15 +418,18 @@
         <!-- 3. 炭火焼肉 和牛亭 -->
         <div class="card bg-zinc-950 border border-zinc-800 hover:border-accent/40 overflow-hidden group">
           <div class="overflow-hidden">
-            <div class="work-thumb thumb-wagyu">Wagyu LP</div>
+            <div class="work-thumb thumb-wagyu">
+              <div class="work-thumb-bar"><span class="work-thumb-dot" style="background:#ff5f57"></span><span class="work-thumb-dot" style="background:#febc2e"></span><span class="work-thumb-dot" style="background:#28c840"></span><span class="work-thumb-url"></span></div>
+              <div class="work-thumb-body">Wagyu LP</div>
+            </div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap items-center gap-2 mb-3">
               <span class="text-xs bg-zinc-800 text-zinc-400 px-2.5 py-1">飲食店</span>
               <span class="text-xs bg-accent/15 text-accent-light border border-accent/30 px-2.5 py-1">予約フォーム</span>
             </div>
-            <h3 class="font-bold text-base mb-2">炭火焼肉 和牛亭</h3>
-            <p class="text-zinc-500 text-sm mb-4 leading-relaxed">福岡市中央区の高級焼肉店LP。Formspree連携の予約問い合わせフォームをJSバリデーション付きで実装。</p>
+            <h3 class="font-semibold text-base mb-2">炭火焼肉 和牛亭</h3>
+            <p class="text-zinc-400 text-sm mb-4 leading-relaxed">福岡市中央区の高級焼肉店LP。予約・問い合わせフォームを設置し、送信内容がオーナーのメールに即時届く仕組みを実装。</p>
             <a href="https://lp-projects.vercel.app/wagyu-tei.html" target="_blank" rel="noopener"
                aria-label="炭火焼肉 和牛亭 のサイトを見る（新しいタブで開く）"
                class="inline-flex items-center gap-1.5 text-accent text-xs hover:text-accent-light transition-colors font-medium">
@@ -403,45 +442,54 @@
         <!-- 4. パーソナルジム APEX（スクリーンショットあり・URL非公開） -->
         <div class="card bg-zinc-950 border border-zinc-800 hover:border-accent/40 overflow-hidden group">
           <div class="overflow-hidden">
-            <div class="work-thumb thumb-gym">Gym LP</div>
+            <div class="work-thumb thumb-gym">
+              <div class="work-thumb-bar"><span class="work-thumb-dot" style="background:#ff5f57"></span><span class="work-thumb-dot" style="background:#febc2e"></span><span class="work-thumb-dot" style="background:#28c840"></span><span class="work-thumb-url"></span></div>
+              <div class="work-thumb-body">Gym LP</div>
+            </div>
           </div><!-- TODO: クライアント許可済みスクリーンショットに差し替え -->
           <div class="p-6">
             <div class="flex flex-wrap items-center gap-2 mb-3">
               <span class="text-xs bg-zinc-800 text-zinc-400 px-2.5 py-1">フィットネス</span>
               <span class="text-xs bg-accent/15 text-accent-light border border-accent/30 px-2.5 py-1">体験予約 + シミュレーター</span>
             </div>
-            <h3 class="font-bold text-base mb-2">パーソナルジム APEX</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed">都内パーソナルジムのLP。体験レッスン予約フォームとコース別料金シミュレーターを実装。URL非公開。</p>
+            <h3 class="font-semibold text-base mb-2">パーソナルジム APEX</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">都内パーソナルジムのLP。体験レッスン予約フォームとコース別料金シミュレーターを実装。URL非公開。</p>
           </div>
         </div>
 
         <!-- 5. 不動産 -->
         <div class="card bg-zinc-950 border border-zinc-800 hover:border-accent/40 overflow-hidden group">
           <div class="overflow-hidden">
-            <div class="work-thumb thumb-realestate">Real Estate LP</div>
+            <div class="work-thumb thumb-realestate">
+              <div class="work-thumb-bar"><span class="work-thumb-dot" style="background:#ff5f57"></span><span class="work-thumb-dot" style="background:#febc2e"></span><span class="work-thumb-dot" style="background:#28c840"></span><span class="work-thumb-url"></span></div>
+              <div class="work-thumb-body">Real Estate LP</div>
+            </div>
           </div><!-- TODO: クライアント許可済みスクリーンショットに差し替え -->
           <div class="p-6">
             <div class="flex flex-wrap items-center gap-2 mb-3">
               <span class="text-xs bg-zinc-800 text-zinc-400 px-2.5 py-1">不動産</span>
               <span class="text-xs bg-accent/15 text-accent-light border border-accent/30 px-2.5 py-1">無料査定フォーム</span>
             </div>
-            <h3 class="font-bold text-base mb-2">不動産会社 物件LP</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed">不動産会社の物件紹介LP。無料査定申し込みフォームとエリア・条件絞り込み機能を実装。URL非公開。</p>
+            <h3 class="font-semibold text-base mb-2">不動産会社 物件LP</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">不動産会社の物件紹介LP。無料査定申し込みフォームとエリア・条件絞り込み機能を実装。URL非公開。</p>
           </div>
         </div>
 
         <!-- 6. 歯科クリニック -->
         <div class="card bg-zinc-950 border border-zinc-800 hover:border-accent/40 overflow-hidden group">
           <div class="overflow-hidden">
-            <div class="work-thumb thumb-dental">Dental LP</div>
+            <div class="work-thumb thumb-dental">
+              <div class="work-thumb-bar"><span class="work-thumb-dot" style="background:#ff5f57"></span><span class="work-thumb-dot" style="background:#febc2e"></span><span class="work-thumb-dot" style="background:#28c840"></span><span class="work-thumb-url"></span></div>
+              <div class="work-thumb-body">Dental LP</div>
+            </div>
           </div><!-- TODO: クライアント許可済みスクリーンショットに差し替え -->
           <div class="p-6">
             <div class="flex flex-wrap items-center gap-2 mb-3">
               <span class="text-xs bg-zinc-800 text-zinc-400 px-2.5 py-1">医療</span>
               <span class="text-xs bg-accent/15 text-accent-light border border-accent/30 px-2.5 py-1">オンライン予約</span>
             </div>
-            <h3 class="font-bold text-base mb-2">やまと歯科クリニック</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed">地域密着型歯科医院のLP。初診・再診に対応したLINE連携オンライン予約システムを実装。URL非公開。</p>
+            <h3 class="font-semibold text-base mb-2">やまと歯科クリニック</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">地域密着型歯科医院のLP。初診・再診に対応したLINE連携オンライン予約システムを実装。URL非公開。</p>
           </div>
         </div>
 
@@ -450,11 +498,11 @@
   </section>
 
   <!-- ========== 5. 料金プラン ========== -->
-  <section id="pricing" class="py-24 bg-zinc-950 border-t border-zinc-900" aria-labelledby="pricing-heading">
+  <section id="pricing" class="py-24 bg-zinc-950 border-t-2 border-accent/30" aria-labelledby="pricing-heading">
     <div class="max-w-5xl mx-auto px-4">
       <div class="text-center mb-16">
         <p class="text-accent text-xs tracking-[0.4em] uppercase font-medium mb-3">Pricing</p>
-        <h2 id="pricing-heading" class="text-3xl md:text-4xl font-black mb-3">料金目安</h2>
+        <h2 id="pricing-heading" class="text-3xl md:text-4xl font-bold mb-3">料金目安</h2>
         <p class="text-zinc-500 text-sm">すべて税込・要件によりお見積もり</p>
       </div>
 
@@ -465,24 +513,24 @@
           <p class="text-zinc-500 text-xs tracking-widest uppercase mb-4">Basic</p>
           <h3 class="font-bold text-xl mb-3">LP基本プラン</h3>
           <p class="text-4xl font-black mb-1">¥80,000<span class="text-lg font-normal text-zinc-500">〜</span></p>
-          <p class="text-zinc-600 text-xs mb-6">納期：10〜14日</p>
+          <p class="text-zinc-500 text-xs mb-6">納期：10〜14日</p>
           <div class="h-px bg-zinc-800 mb-6"></div>
           <ul class="space-y-3.5 text-sm text-zinc-400 mb-8">
             <li class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              静的LP（8セクション程度）
+              集客ページ（8セクション程度）
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              レスポンシブ対応
+              スマホ・PC 両対応
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              SEO基本設定
+              Google検索に載りやすい設定
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              Vercelデプロイ
+              <span>サーバー設置代行 <strong class="text-white">+¥3,000</strong>（オプション）</span>
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -503,7 +551,7 @@
           <p class="text-accent-light text-xs tracking-widest uppercase mb-4">Standard</p>
           <h3 class="font-bold text-xl mb-3">LP＋機能プラン</h3>
           <p class="text-4xl font-black mb-1">¥150,000<span class="text-lg font-normal text-zinc-500">〜</span></p>
-          <p class="text-zinc-600 text-xs mb-6">納期：14〜21日</p>
+          <p class="text-zinc-500 text-xs mb-6">納期：14〜21日</p>
           <div class="h-px bg-zinc-800 mb-6"></div>
           <ul class="space-y-3.5 text-sm text-zinc-400 mb-8">
             <li class="flex items-start gap-2.5">
@@ -538,7 +586,7 @@
           <p class="text-zinc-500 text-xs tracking-widest uppercase mb-4">Premium</p>
           <h3 class="font-bold text-xl mb-3">フルカスタム</h3>
           <p class="text-4xl font-black mb-1">要相談</p>
-          <p class="text-zinc-600 text-xs mb-6">納期：要相談</p>
+          <p class="text-zinc-500 text-xs mb-6">納期：要相談</p>
           <div class="h-px bg-zinc-800 mb-6"></div>
           <ul class="space-y-3.5 text-sm text-zinc-400 mb-8">
             <li class="flex items-start gap-2.5">
@@ -573,7 +621,7 @@
         </div>
 
       </div>
-      <p class="text-center text-zinc-700 text-xs mt-8">※ 料金はあくまで目安です。要件・ページ数・機能によって変動します。まずはお気軽にご相談ください。</p>
+      <p class="text-center text-zinc-500 text-xs mt-8">※ 料金はあくまで目安です。要件・ページ数・機能によって変動します。まずはお気軽にご相談ください。</p>
     </div>
   </section>
 
@@ -582,7 +630,7 @@
     <div class="max-w-3xl mx-auto px-4">
       <div class="text-center mb-16">
         <p class="text-accent text-xs tracking-[0.4em] uppercase font-medium mb-3">Process</p>
-        <h2 id="process-heading" class="text-3xl md:text-4xl font-black mb-3">制作の流れ</h2>
+        <h2 id="process-heading" class="text-3xl md:text-4xl font-bold mb-3">制作の流れ</h2>
         <p class="text-zinc-500 text-sm">ご依頼から納品まで、5ステップ</p>
       </div>
 
@@ -596,10 +644,10 @@
           </div>
           <div class="pb-10 pt-1">
             <div class="flex items-center gap-3 mb-2">
-              <h3 class="font-bold text-base">ヒアリング</h3>
+              <h3 class="font-semibold text-base">ヒアリング</h3>
               <span class="text-xs bg-green-900/40 text-green-400 border border-green-800/50 px-2 py-0.5">無料</span>
             </div>
-            <p class="text-zinc-500 text-sm leading-relaxed">業種・ターゲット・目標・ご予算・納期などをヒアリング。ZoomまたはDMにてお気軽にご相談ください。</p>
+            <p class="text-zinc-400 text-sm leading-relaxed">業種・ターゲット・目標・ご予算・納期などをヒアリング。このページ下部のフォームからお気軽にご連絡ください。</p>
           </div>
         </div>
 
@@ -610,8 +658,8 @@
             <div class="w-px flex-1 bg-zinc-700 mt-2"></div>
           </div>
           <div class="pb-10 pt-1">
-            <h3 class="font-bold text-base mb-2">要件定義・お見積もり</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed">ヒアリング内容をもとにページ構成・機能要件・スケジュールを整理し、お見積もりをご提示します。</p>
+            <h3 class="font-semibold text-base mb-2">要件定義・お見積もり</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">ヒアリング内容をもとにページ構成・機能要件・スケジュールを整理し、お見積もりをご提示します。</p>
           </div>
         </div>
 
@@ -622,8 +670,8 @@
             <div class="w-px flex-1 bg-zinc-700 mt-2"></div>
           </div>
           <div class="pb-10 pt-1">
-            <h3 class="font-bold text-base mb-2">デザイン・コーディング</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed">要件に沿ってデザイン・コーディングを進めます。途中経過を都度共有するため、認識のズレが起きません。</p>
+            <h3 class="font-semibold text-base mb-2">デザイン・コーディング</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">要件に沿ってデザイン・コーディングを進めます。途中経過を都度共有するため、認識のズレが起きません。</p>
           </div>
         </div>
 
@@ -634,8 +682,8 @@
             <div class="w-px flex-1 bg-zinc-700 mt-2"></div>
           </div>
           <div class="pb-10 pt-1">
-            <h3 class="font-bold text-base mb-2">確認・修正</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed">テスト公開URLにてご確認いただき、修正が必要な箇所をフィードバック。プランに応じた修正回数まで対応します。</p>
+            <h3 class="font-semibold text-base mb-2">確認・修正</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">テスト公開URLにてご確認いただき、修正が必要な箇所をフィードバック。プランに応じた修正回数まで対応します。</p>
           </div>
         </div>
 
@@ -645,8 +693,8 @@
             <div class="w-10 h-10 bg-zinc-800 border border-zinc-700 text-zinc-300 flex items-center justify-center font-black text-sm shrink-0">5</div>
           </div>
           <div class="pt-1">
-            <h3 class="font-bold text-base mb-2">公開・納品</h3>
-            <p class="text-zinc-500 text-sm leading-relaxed">本番環境へのデプロイ後、ソースコードとともに納品。Vercel無料プランで月間100GBまで無料ホスティング。</p>
+            <h3 class="font-semibold text-base mb-2">公開・納品</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">公開後はソースファイルごと納品。高速サーバーで無料公開するため、月々のサーバー代は不要です。</p>
           </div>
         </div>
 
@@ -659,7 +707,7 @@
     <div class="max-w-2xl mx-auto px-4">
       <div class="text-center mb-12">
         <p class="text-accent text-xs tracking-[0.4em] uppercase font-medium mb-4">Contact</p>
-        <h2 id="contact-heading" class="text-3xl md:text-5xl font-black mb-6">
+        <h2 id="contact-heading" class="text-3xl md:text-5xl font-bold mb-6">
           まずは<span class="gradient-text">無料相談</span>から
         </h2>
         <div class="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent mb-8"></div>
@@ -672,8 +720,7 @@
       <!-- お問い合わせフォーム -->
       <form id="contact-form"
             action="https://formspree.io/f/mzdalkpe"
-            method="POST"
-            novalidate><!-- TODO: FormspreeのフォームIDに変更 -->
+            method="POST">
 
         <div class="space-y-5 mb-8">
 
@@ -694,7 +741,7 @@
 
           <div>
             <label for="service" class="block text-xs text-zinc-400 mb-2">ご相談内容</label>
-            <select id="service" name="service" class="form-input">
+            <select id="service" name="service" class="form-input appearance-none" style="background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 0.875rem center;padding-right:2.5rem;">
               <option value="">選択してください</option>
               <option value="basic">LP基本プラン（¥80,000〜）</option>
               <option value="standard">LP＋機能プラン（¥150,000〜）</option>
@@ -733,7 +780,7 @@
 
       <!-- サブ導線：ココナラ -->
       <div class="mt-10 pt-8 border-t border-zinc-900 text-center">
-        <p class="text-zinc-600 text-xs mb-4">ココナラからのご依頼も受け付けています</p>
+        <p class="text-zinc-400 text-xs mb-4">ココナラからのご依頼も受け付けています</p>
         <a href="https://coconala.com/users/5937457"
            target="_blank" rel="noopener"
            class="inline-flex items-center gap-2 border border-zinc-700 hover:border-accent/50 text-zinc-400 hover:text-white px-6 py-3 text-sm transition-all">
@@ -744,7 +791,7 @@
         </a>
       </div>
 
-      <p class="text-zinc-700 text-xs mt-6 text-center">通常24時間以内にご返信します</p>
+      <p class="text-zinc-500 text-xs mt-6 text-center">通常24時間以内にご返信します</p>
     </div>
   </section>
 
@@ -755,16 +802,16 @@
     <p class="font-black text-xl mb-1 tracking-tight">jelis<span class="text-accent">.</span></p>
     <p class="text-zinc-600 text-xs mb-6">Web制作 ／ LP＋Webシステム構築</p>
     <nav aria-label="フッターナビゲーション">
-      <div class="flex justify-center gap-6 text-xs text-zinc-600 mb-6">
-        <a href="#about"    class="hover:text-zinc-400 transition-colors">について</a>
-        <a href="#services" class="hover:text-zinc-400 transition-colors">できること</a>
-        <a href="#works"    class="hover:text-zinc-400 transition-colors">実績</a>
-        <a href="#pricing"  class="hover:text-zinc-400 transition-colors">料金</a>
-        <a href="#process"  class="hover:text-zinc-400 transition-colors">制作の流れ</a>
-        <a href="#contact"  class="hover:text-zinc-400 transition-colors">お問い合わせ</a>
+      <div class="flex justify-center gap-6 text-xs text-zinc-500 mb-6">
+        <a href="#about"    class="hover:text-zinc-400 transition-colors">About</a>
+        <a href="#services" class="hover:text-zinc-400 transition-colors">Services</a>
+        <a href="#works"    class="hover:text-zinc-400 transition-colors">Works</a>
+        <a href="#pricing"  class="hover:text-zinc-400 transition-colors">Pricing</a>
+        <a href="#process"  class="hover:text-zinc-400 transition-colors">Process</a>
+        <a href="#contact"  class="hover:text-zinc-400 transition-colors">Contact</a>
       </div>
     </nav>
-    <p class="text-zinc-800 text-xs" id="footer-year">© 2025 jelis. All rights reserved.</p>
+    <p class="text-zinc-600 text-xs" id="footer-year">© 2025 jelis. All rights reserved.</p>
   </footer>
 
   <script>
